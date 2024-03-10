@@ -17,6 +17,21 @@ export async function addUserInterfaceInfoUsingPost(
   });
 }
 
+/** addInvokeCount POST /api/userInterfaceInfo/add/invoke/count */
+export async function addInvokeCountUsingPost(
+  body: API.UserInterfaceInfoAddInvokeCountRequest,
+  options?: { [key: string]: any },
+) {
+  return request<API.BaseResponseInt_>('/api/userInterfaceInfo/add/invoke/count', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: body,
+    ...(options || {}),
+  });
+}
+
 /** deleteUserInterfaceInfo POST /api/userInterfaceInfo/delete */
 export async function deleteUserInterfaceInfoUsingPost(
   body: API.DeleteRequest,

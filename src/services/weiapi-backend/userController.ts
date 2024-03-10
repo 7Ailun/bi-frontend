@@ -29,6 +29,14 @@ export async function deleteUserUsingPost(
   });
 }
 
+/** genAkSk POST /api/user/gen/key */
+export async function genAkSkUsingPost(options?: { [key: string]: any }) {
+  return request<API.BaseResponseBoolean_>('/api/user/gen/key', {
+    method: 'POST',
+    ...(options || {}),
+  });
+}
+
 /** getUserById GET /api/user/get */
 export async function getUserByIdUsingGet(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
@@ -216,7 +224,7 @@ export async function handleAvatarUploadUsingPost(
     }
   });
 
-  return request<string>('/api/user/upload', {
+  return request<API.BaseResponseString_>('/api/user/upload', {
     method: 'POST',
     data: formData,
     requestType: 'form',

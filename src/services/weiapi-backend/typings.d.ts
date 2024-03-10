@@ -5,6 +5,12 @@ declare namespace API {
     message?: string;
   };
 
+  type BaseResponseInt_ = {
+    code?: number;
+    data?: number;
+    message?: string;
+  };
+
   type BaseResponseInterfaceInfoVO_ = {
     code?: number;
     data?: InterfaceInfoVO;
@@ -182,6 +188,7 @@ declare namespace API {
     createTime?: string;
     description?: string;
     id?: string;
+    leftNum?: number;
     method?: string;
     name?: string;
     requestHeader?: string;
@@ -353,6 +360,12 @@ declare namespace API {
     userAvatar?: string;
     userName?: string;
     userRole?: string;
+  };
+
+  type UserInterfaceInfoAddInvokeCountRequest = {
+    interfaceInfoId?: string;
+    number?: number;
+    userId?: string;
   };
 
   type UserInterfaceInfoAddRequest = {

@@ -1,30 +1,33 @@
 import Footer from '@/components/Footer';
 import { Question } from '@/components/RightContent';
+import { getLoginUserUsingGet } from '@/services/weiapi-backend/userController';
 import { SettingDrawer } from '@ant-design/pro-components';
 import type { RunTimeLayoutConfig } from '@umijs/max';
 import { history } from '@umijs/max';
 import { AvatarDropdown, AvatarName } from './components/RightContent/AvatarDropdown';
 import { requestConfig } from './requestConfig';
-import {getLoginUserUsingGet} from "@/services/weiapi-backend/userController";
+
 const isDev = process.env.NODE_ENV === 'development';
 const loginPath = '/user/login';
-
 /**
  * @see  https://umijs.org/zh-CN/plugins/plugin-initial-state
  * */
 export async function getInitialState(): Promise<InitialState> {
   // 当页面首次加载时，获取要全局保存的数据，比如用户信息
   const state: InitialState = {
-    loginUser: undefined
-  }
+    loginUser: undefined,
+  };
 
   try {
     const res = await getLoginUserUsingGet();
-    if(res.data) {
+    if (res.data) {
       state.loginUser = res.data;
+    } else {
+      history.push(loginPath);
     }
-  } catch (error) {
-    history.push(loginPath);
+  } catch (error: any) {
+    // history.push(loginPath);
+    // message.error(error)
   }
   return state;
 }
@@ -124,4 +127,4 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
  * 它基于 axios 和 ahooks 的 useRequest 提供了一套统一的网络请求和错误处理方案。
  * @doc https://umijs.org/docs/max/request#配置
  */
-export const request = requestConfig
+export const request = requestConfig;
